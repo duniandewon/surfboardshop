@@ -8,12 +8,35 @@ const session = require('express-session');
 const passport = require('passport');
 const User = require('./models/user');
 
+const mongoose = require('mongoose');
+
 /** define routes */
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const reviewsRouter = require('./routes/reviews');
 
 const app = express();
+
+/** connect to database */
+const connectDB = async () => {
+  try {
+    await mongoose.connect(
+      'mongodb+srv://testapi:helloworld@test-api-szxff.mongodb.net/test?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
+      }
+    );
+
+    console.log('database is connected!');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+connectDB();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
