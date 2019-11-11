@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { postRegister } = require('../controllers/index');
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -12,9 +13,7 @@ router.get('/register', (req, res) => {
 });
 
 /** POST /register */
-router.post('/register', (req, res) => {
-  res.send('POST /register');
-});
+router.post('/register', postRegister);
 
 /** GET /login */
 router.get('/login', (req, res) => {
